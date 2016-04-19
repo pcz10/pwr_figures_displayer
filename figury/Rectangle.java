@@ -1,12 +1,11 @@
 package figury;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-
 import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
 
 import tools.RandomValues;
 
@@ -19,19 +18,20 @@ public class Rectangle extends JComponent implements Figure, Moveable
 	public Rectangle(int rangeMin, int rangeMax)
 	{
 		RandomValues validator = new RandomValues();
-		x = validator.randomize(rangeMin, rangeMax);
-		y = validator.randomize(rangeMin, rangeMax);
-		height = validator.randomize(rangeMin, rangeMax);
-		width = validator.randomize(rangeMin, rangeMax);
+		this.x = validator.randomize(rangeMin, rangeMax);
+		this.y = validator.randomize(rangeMin, rangeMax);
+		this.height = validator.randomize(rangeMin, rangeMax);
+		this.width = validator.randomize(rangeMin, rangeMax);
+		System.out.println("I am rectangle. My coords are x = "+x+" y = "+y+" height= "+height+" width = "+width);
 	}
 	public Rectangle()
 	{
 		RandomValues validator = new RandomValues();
-		x = validator.randomize(rangeMin, rangeMax);
-		y = validator.randomize(rangeMin, rangeMax);
+		this.x = validator.randomize(rangeMin, rangeMax);
+		this.y = validator.randomize(rangeMin, rangeMax);
 		int temp = validator.randomize(rangeMin, rangeMax);
-		width = temp;
-		height = temp;
+		this.width = temp;
+		this.height = temp;
 	}
 	public int getX() {
 		return x;
@@ -52,12 +52,12 @@ public class Rectangle extends JComponent implements Figure, Moveable
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setPaint(new GradientPaint(0,0,Color.gray,20,20,Color.PINK,true));
-		g2.fillRect(x,y,width,height);
+		g2.fillRect(100,100,300,300);
 	}
 	
 	public void drawObject(Frame frame)
 	{
-		frame.add(new Rectangle());
+		frame.add(this);
 		frame.revalidate();
 		frame.repaint();
 	}
@@ -69,6 +69,7 @@ public class Rectangle extends JComponent implements Figure, Moveable
 	@Override
 	public void moveObject(int dx, int dy) 
 	{
+		System.out.println("moveObject RECTANGLE working!");
 		this.x += dx;
 		this.y += dy;
 		repaint();

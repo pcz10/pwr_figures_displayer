@@ -23,6 +23,7 @@ public class Triangle extends JComponent implements Figure, Moveable
 		this.x[i] = validator.randomize(rangeMin, rangeMax);
 		this.y[i] = validator.randomize(rangeMin, rangeMax);
 		}
+		System.out.println("I am triangle. My coords are x0,y0 = ("+x[0]+","+y[0]+") x1,y1 = ("+x[1]+","+y[1]+") x2,y2 = ("+x[2]+","+y[2]+")");
 	}
 	public void setX(int[] x) {
 		this.x = x;

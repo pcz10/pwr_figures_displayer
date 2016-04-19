@@ -21,6 +21,7 @@ public class Circle extends JComponent implements Figure, Moveable
 		x = validator.randomize(rangeMin, rangeMax);
 		y = validator.randomize(rangeMin, rangeMax);
 		radius = validator.randomize(rangeMin, rangeMax);
+		System.out.println("I am circle. My coords are x = "+x+" y = "+y+" diameter= "+2*radius);
 	}
 	@Override
 	protected void paintComponent(Graphics g)
@@ -34,12 +35,12 @@ public class Circle extends JComponent implements Figure, Moveable
 	private void drawCircle(Graphics c)
 	{
 		int diameter = 2*radius;
-		c.drawOval(x+radius, y-radius, diameter, diameter);
-		c.fillOval(x+radius, y-radius, diameter, diameter);
+		c.drawOval(x, y, diameter, diameter);
+		c.fillOval(x, y, diameter, diameter);
 	}
 	public void drawObject(Frame frame) 
 	{
-		frame.add(new Circle());
+		frame.add(this);
 		frame.revalidate();
 		frame.repaint();
 	}
@@ -64,8 +65,9 @@ public class Circle extends JComponent implements Figure, Moveable
 	}
 	public void moveObject(int dx, int dy)
 	{
-		this.setX(this.x + dx);
-		this.setY(this.y + dy);
+		System.out.println("moveObject TRIANGLE working!");
+		this.x += dx;
+		this.y += dy;
 		repaint();
 	}
 }

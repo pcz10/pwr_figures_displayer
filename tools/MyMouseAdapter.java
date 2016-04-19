@@ -2,7 +2,6 @@ package tools;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import figury.*;
 import javax.swing.JPanel;
@@ -32,7 +31,7 @@ public class MyMouseAdapter extends JPanel
 		{
 			int dx = e.getX() - preX;
 			int dy = e.getY() - preY;
-			
+			System.out.println("mouse Dragged working!");
 			if(frame.getFigure(preX,preY) != null)
 			{
 				frame.getFigure(preX,preY).moveObject(dx,dy);
