@@ -11,10 +11,6 @@ import tools.RandomValues;
 
 public class Rectangle extends JComponent implements Figure, Moveable
 {
-	private int x;
-	private int y;
-	private int height;
-	private int width;
 	public Rectangle(int rangeMin, int rangeMax)
 	{
 		RandomValues validator = new RandomValues();
@@ -22,7 +18,6 @@ public class Rectangle extends JComponent implements Figure, Moveable
 		this.y = validator.randomize(rangeMin, rangeMax);
 		this.height = validator.randomize(rangeMin, rangeMax);
 		this.width = validator.randomize(rangeMin, rangeMax);
-		System.out.println("I am rectangle. My coords are x = "+x+" y = "+y+" height= "+height+" width = "+width);
 	}
 	public Rectangle()
 	{
@@ -32,20 +27,14 @@ public class Rectangle extends JComponent implements Figure, Moveable
 		int temp = validator.randomize(RANGE_MIN, RANGE_MAX);
 		this.width = temp;
 		this.height = temp;	
-		System.out.println("I am rectangle. My coords are x = "+x+" y = "+y+" height= "+height+" width = "+width);
 	}
 	
 	public int getX() {
 		return x;
 	}
-	public void setX(int x) {
-		this.x = x;
-	}
+	
 	public int getY() {
 		return y;
-	}
-	public void setY(int y) {
-		this.y = y;
 	}
 	
 	@Override
@@ -63,28 +52,27 @@ public class Rectangle extends JComponent implements Figure, Moveable
 	{
 		frame.add(this);
 		frame.revalidate();
-		frame.repaint();
 	}
 
-	public boolean containsFigure(int x,int y)
+	public boolean containsFigure(int xCoordinateWhileClicked,int yCoordinateWhileClicked)
 	{
-		if(x > this.x && x < (this.x + this.width) && y > this.y && y < (this.y+this.height))
-		{
-			System.out.println("contains Figure, x,y: "+x+", "+y+" and this x,y: "+this.x+","+this.y);
+		if(xCoordinateWhileClicked > this.x && xCoordinateWhileClicked < (this.x + this.width) 
+				&& yCoordinateWhileClicked > this.y && yCoordinateWhileClicked < (this.y+this.height))
 			return true;
-		}
 		else
-		{
-			System.out.println("contains figure returns false");
 			return false;
-		}
 	}
+	
 	@Override
-	public void moveObject(int dx, int dy) 
+	public void moveObject(int xOffsetValue, int yOffsetValue) 
 	{
-		System.out.println("moveObject RECTANGLE working!");
 		repaint(0,0, this.width + 1, this.height + 1);
-		this.x += dx;
-		this.y += dy;
+		this.x += xOffsetValue;
+		this.y += yOffsetValue;
 	}
+	
+	private int x;
+	private int y;
+	private int height;
+	private int width;
 }

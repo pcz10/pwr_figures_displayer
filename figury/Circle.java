@@ -12,37 +12,29 @@ import tools.RandomValues;
 
 public class Circle extends JComponent implements Figure, Moveable
 {
-	private int x;
-	private int y;
-	private int diameter;
 	public Circle(int rangeMin, int rangeMax)
 	{
 		RandomValues validator = new RandomValues();
 		x = validator.randomize(rangeMin, rangeMax);
 		y = validator.randomize(rangeMin, rangeMax);
 		diameter = validator.randomize(rangeMin, rangeMax);
-		System.out.println("I am circle. My coords are x = "+x+" y = "+y+" diameter= "+diameter);
 	}
+	
 	public Circle()
 	{
 		RandomValues validator = new RandomValues();
 		x = validator.randomize(RANGE_MIN, RANGE_MAX);
 		y = validator.randomize(RANGE_MIN, RANGE_MAX);
 		diameter = validator.randomize(RANGE_MIN, RANGE_MAX);
-		System.out.println("I am circle. My coords are x = "+x+" y = "+y+" diameter= "+diameter);
 	}
 	
-	public int getX() {
+	public int getX() 
+	{
 		return x;
 	}
-	public void setX(int x) {
-		this.x = x;
-	}
+
 	public int getY() {
 		return y;
-	}
-	public void setY(int y) {
-		this.y = y;
 	}
 	
 	@Override
@@ -59,27 +51,25 @@ public class Circle extends JComponent implements Figure, Moveable
 	{
 		frame.add(this);
 		frame.revalidate();
-		frame.repaint();
 	}
 
-	public boolean containsFigure(int x,int y)
+	public boolean containsFigure(int xCoordinateWhileClicked,int yCoordinateWhileClicked)
 	{
-		if(x > this.x && x < (this.x + this.diameter) && y > this.y && y < (this.y+this.diameter))
-			{
-				System.out.println("contains Figure, x,y: "+x+", "+y+" and this x,y: "+this.x+","+this.y);
-				return true;
-			}
+		if(xCoordinateWhileClicked > this.x && xCoordinateWhileClicked < (this.x + this.diameter) 
+				&& yCoordinateWhileClicked > this.y && yCoordinateWhileClicked < (this.y+this.diameter))
+			return true;
 		else
-			{
-				System.out.println("contains figure returns false");
-				return false;
-			}
+			return false;
 	}
-	public void moveObject(int dx, int dy)
+	
+	public void moveObject(int xOffsetValue, int yOffsetValue)
 	{
-		System.out.println("moveObject CIRCLE working!");
 		repaint(0, 0, this.diameter+1, this.diameter+1);
-		this.x += dx;
-		this.y += dy;
+		this.x += xOffsetValue;
+		this.y += yOffsetValue;
 	}
+	
+	private int x;
+	private int y;
+	private int diameter;
 }

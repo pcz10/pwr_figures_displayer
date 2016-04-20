@@ -1,21 +1,16 @@
 package figury;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.Arrays;
-
 import javax.swing.JComponent;
-
 import tools.RandomValues;
 
 public class Triangle extends JComponent implements Figure, Moveable
 {
-	private int[] x = new int[3];
-	private int[] y = new int[3];
-	final static int TRIANGLE = 3;
-	
 	public Triangle()
 	{
 		RandomValues validator = new RandomValues();
@@ -26,14 +21,8 @@ public class Triangle extends JComponent implements Figure, Moveable
 		}
 		Arrays.sort(this.x);
 		Arrays.sort(this.y);
-		System.out.println("I am triangle. My coords are x0,y0 = ("+x[0]+","+y[0]+") x1,y1 = ("+x[1]+","+y[1]+") x2,y2 = ("+x[2]+","+y[2]+")");
 	}
-	public void setX(int[] x) {
-		this.x = x;
-	}
-	public void setY(int[] y) {
-		this.y = y;
-	}
+	
 	protected void paintComponent(Graphics g) 
 	{
 		super.paintComponent(g);
@@ -44,19 +33,22 @@ public class Triangle extends JComponent implements Figure, Moveable
 		g2.fillPolygon(x, y, TRIANGLE);
 		repaint();
 	}
+	
 	public void drawObject(Frame frame) 
 	{
 		frame.add(this);
 		frame.revalidate();
-		frame.repaint();
 	}
-	@Override
-	public boolean contains(int x, int y)
+	
+	public boolean contains(int xCoordinateWhileClicked, int yCoordinateWhileClicked)
 	{
-		if (x > this.x[0] && x <(this.x[0]+(this.x[2]-this.x[0])) && y > this.y[0] && y <(this.y[0]+(this.y[2]-this.y[0])))
+		if (xCoordinateWhileClicked > this.x[0] && xCoordinateWhileClicked <(this.x[0]+(this.x[2]-this.x[0])) 
+				&& yCoordinateWhileClicked > this.y[0] && yCoordinateWhileClicked <(this.y[0]+(this.y[2]-this.y[0])))
 			return true;
-		return false;
+		else 
+			return false;
 	}
+	
 	@Override
 	public void moveObject(int dx, int dy) 
 	{
@@ -66,6 +58,14 @@ public class Triangle extends JComponent implements Figure, Moveable
 			this.y[i]+=dy;
 		}
 	}
-
 	
+	@Override
+	public boolean containsFigure(int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	private int[] x = new int[3];
+	private int[] y = new int[3];
+	final static int TRIANGLE = 3;
 }

@@ -4,11 +4,6 @@ import javax.swing.JFrame;
 
 public class Frame extends JFrame
 {
-	private static final int FRAME_WIDTH = 800;
-	private static final int FRAME_HEIGHT = 800;
-	private Rectangle rec = new Rectangle();
-	private Circle circle = new Circle();
-	private Triangle triangle = new Triangle();
 	public Frame()
 	{
 		
@@ -17,22 +12,29 @@ public class Frame extends JFrame
 		setVisible(true);
 		creator();
 	}
-	public void creator()
+	
+	private void creator()
 	{
 		rec.drawObject(this);
 		circle.drawObject(this);
 		triangle.drawObject(this);
 	}
-	public Moveable getFigure(int preX,int preY)
+	
+	public Moveable getFigure(int xCoordinateWhileClicked,int yCoordinateWhileClicked)
 	{	
-		if(circle.containsFigure(preX, preY))
+		if(circle.containsFigure(xCoordinateWhileClicked, yCoordinateWhileClicked))
 			return circle;
-		else if(rec.containsFigure(preX,preY))
+		else if(rec.containsFigure(xCoordinateWhileClicked, yCoordinateWhileClicked))
 			return rec;
-		else if(triangle.contains(preX, preY))
+		else if(triangle.contains(xCoordinateWhileClicked, yCoordinateWhileClicked))
 			return triangle;
 		else
 			return null;
 	}
-	
+
+	private static final int FRAME_WIDTH = 800;
+	private static final int FRAME_HEIGHT = 800;
+	private Rectangle rec = new Rectangle();
+	private Circle circle = new Circle();
+	private Triangle triangle = new Triangle();
 }

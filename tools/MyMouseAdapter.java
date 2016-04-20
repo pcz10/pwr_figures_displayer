@@ -10,39 +10,42 @@ import figury.Frame;
 
 public class MyMouseAdapter extends JPanel
 {
-	private BindMouseMove movingAdpapt = new BindMouseMove();
-	private Frame frame;
 	public MyMouseAdapter(Frame frame)
 	{
 		this.frame = frame;
 		addMouseListener(movingAdpapt);
 		addMouseMotionListener(movingAdpapt);
 	}
+	
 	class BindMouseMove extends MouseAdapter
 	{
-		private int preX;
-		private int preY;
+		private int pressedX;
+		private int pressedY;
+		
 		@Override
 		public void mousePressed(MouseEvent e)
 		{
-			  preX = e.getX();
-			  preY = e.getY();
-			  System.out.println("pressed X,Y: {"+preX+","+preY+"}");
+			pressedX = e.getX();
+			pressedY = e.getY();
 		}
+		
 		@Override 
 		public void mouseDragged(MouseEvent e)
 		{
 			frame.repaint();
-			int dx = e.getX() - preX;
-			int dy = e.getY() - preY;
-			System.out.println("e.getX,Y()  :  X,Y = (" +e.getX()+" , "+e.getY()+" )");
-			if(frame.getFigure(preX,preY) != null)
+			int xOffsetValue = e.getX() - pressedX;
+			int yOffsetValue = e.getY() - pressedY;
+			System.out.println("current coords  :  X,Y = (" + e.getX() + " , " + e.getY() + " )");
+			if(frame.getFigure(pressedX, pressedY) != null)
 			{
-				frame.repaint(0, preX, preY, dx, dy);
-				frame.getFigure(preX,preY).moveObject(dx,dy);
+				frame.repaint(0, pressedX, pressedY, xOffsetValue, yOffsetValue);
+				frame.getFigure(pressedX,pressedY).moveObject(xOffsetValue, yOffsetValue);
 			}
-			preX += dx;
-		    preY += dy;
+			pressedX += xOffsetValue;
+			pressedY += yOffsetValue;
 		}
 	}
+	
+	private BindMouseMove movingAdpapt = new BindMouseMove();
+	private Frame frame;
 }
