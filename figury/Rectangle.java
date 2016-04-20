@@ -27,9 +27,9 @@ public class Rectangle extends JComponent implements Figure, Moveable
 	public Rectangle()
 	{
 		RandomValues validator = new RandomValues();
-		this.x = validator.randomize(rangeMin, rangeMax);
-		this.y = validator.randomize(rangeMin, rangeMax);
-		int temp = validator.randomize(rangeMin, rangeMax);
+		this.x = validator.randomize(RANGE_MIN, RANGE_MAX);
+		this.y = validator.randomize(RANGE_MIN, RANGE_MAX);
+		int temp = validator.randomize(RANGE_MIN, RANGE_MAX);
 		this.width = temp;
 		this.height = temp;	
 		System.out.println("I am rectangle. My coords are x = "+x+" y = "+y+" height= "+height+" width = "+width);
@@ -55,14 +55,13 @@ public class Rectangle extends JComponent implements Figure, Moveable
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setPaint(new GradientPaint(0,0,Color.gray,20,20,Color.PINK,true));
-		g2.fillRect(this.x, this.y,this.width, this.height);
-		System.out.println("paintComponent working");
+		g2.fillRect(0, 0,this.width, this.height);
+		repaint();
 	}
 	
 	public void drawObject(Frame frame)
 	{
 		frame.add(this);
-		
 		frame.revalidate();
 		frame.repaint();
 	}
@@ -84,15 +83,8 @@ public class Rectangle extends JComponent implements Figure, Moveable
 	public void moveObject(int dx, int dy) 
 	{
 		System.out.println("moveObject RECTANGLE working!");
+		repaint(0,0, this.width + 1, this.height + 1);
 		this.x += dx;
 		this.y += dy;
-		repaint();
 	}
-	//@Override
-	//public boolean contains(int x_, int y_)
-	//{
-	//	if (x_ < (this.x + this.width) && x_ > this.x && y_ < this.y && y_ > (this.y - this.height))
-	//		return true;
-	//	return false;
-	//}
 }

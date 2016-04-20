@@ -7,32 +7,32 @@ public class Frame extends JFrame
 	private static final int FRAME_WIDTH = 800;
 	private static final int FRAME_HEIGHT = 800;
 	private Rectangle rec = new Rectangle();
-	
+	private Circle circle = new Circle();
+	private Triangle triangle = new Triangle();
 	public Frame()
 	{
 		
 		setSize(FRAME_WIDTH,FRAME_HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		add(rec);
-		rec.repaint();
 		setVisible(true);
-		//creator();
+		creator();
 	}
-	//private void creator()
-	//{
-	//	rec.drawObject(this);
-	//	System.out.println(" x: "+rec.getX()+" y: "+rec.getY());
-	//	circl.drawObject(this);
-	//	System.out.println(" x: "+circl.getX()+" y: "+circl.getY());
-	
-		//trian.drawObject(this);
-//	}
-	public Moveable getFigure(int preX,int preY)
+	public void creator()
 	{
-		if(rec.containsFigure(preX, preY))
+		rec.drawObject(this);
+		circle.drawObject(this);
+		triangle.drawObject(this);
+	}
+	public Moveable getFigure(int preX,int preY)
+	{	
+		if(circle.containsFigure(preX, preY))
+			return circle;
+		else if(rec.containsFigure(preX,preY))
 			return rec;
-		
-		return null;
+		else if(triangle.contains(preX, preY))
+			return triangle;
+		else
+			return null;
 	}
 	
 }

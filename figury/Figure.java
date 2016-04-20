@@ -2,7 +2,7 @@ package figury;
 
 public interface Figure
 {
-	public static final int rangeMin = 100;
-	public static final int rangeMax = 200;
+	public static final int RANGE_MIN = 100;
+	public static final int RANGE_MAX = 200;
 	void drawObject(Frame frame);
 }

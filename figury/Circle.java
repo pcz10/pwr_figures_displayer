@@ -14,39 +14,47 @@ public class Circle extends JComponent implements Figure, Moveable
 {
 	private int x;
 	private int y;
-	private int radius;
-	private int diameter = 2*radius;
+	private int diameter;
 	public Circle(int rangeMin, int rangeMax)
 	{
 		RandomValues validator = new RandomValues();
 		x = validator.randomize(rangeMin, rangeMax);
 		y = validator.randomize(rangeMin, rangeMax);
-		radius = validator.randomize(rangeMin, rangeMax);
-		System.out.println("I am circle. My coords are x = "+x+" y = "+y+" diameter= "+2*radius);
+		diameter = validator.randomize(rangeMin, rangeMax);
+		System.out.println("I am circle. My coords are x = "+x+" y = "+y+" diameter= "+diameter);
 	}
 	public Circle()
 	{
 		RandomValues validator = new RandomValues();
-		x = validator.randomize(rangeMin, rangeMax);
-		y = validator.randomize(rangeMin, rangeMax);
-		radius = validator.randomize(rangeMin, rangeMax);
-		System.out.println("I am circle. My coords are x = "+x+" y = "+y+" diameter= "+2*radius);
+		x = validator.randomize(RANGE_MIN, RANGE_MAX);
+		y = validator.randomize(RANGE_MIN, RANGE_MAX);
+		diameter = validator.randomize(RANGE_MIN, RANGE_MAX);
+		System.out.println("I am circle. My coords are x = "+x+" y = "+y+" diameter= "+diameter);
 	}
+	
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		//g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setPaint(new GradientPaint(0,0,Color.gray,20,20,Color.green,true));
-		g2.fillOval(this.x, this.y, this.diameter, this.diameter);
-		
+		g2.fillOval(0, 0, this.diameter, this.diameter);
+		repaint();
 	}
-	//private void drawCircle(Graphics c)
-	//{
-	//	this.diameter = 2*radius;
-	//	c.fillOval(x,y, diameter, diameter);
-	//}
 	public void drawObject(Frame frame) 
 	{
 		frame.add(this);
@@ -67,24 +75,11 @@ public class Circle extends JComponent implements Figure, Moveable
 				return false;
 			}
 	}
-	public int getX() {
-		return x;
-	}
-	public void setX(int x) {
-		this.x = x;
-	}
-	public int getY() {
-		return y;
-	}
-	public void setY(int y) {
-		this.y = y;
-	}
-	
 	public void moveObject(int dx, int dy)
 	{
 		System.out.println("moveObject CIRCLE working!");
+		repaint(0, 0, this.diameter+1, this.diameter+1);
 		this.x += dx;
 		this.y += dy;
-		repaint();
 	}
 }
