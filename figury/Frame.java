@@ -4,36 +4,35 @@ import javax.swing.JFrame;
 
 public class Frame extends JFrame
 {
-	private static final int WIDTH = 800;
-	private static final int HEIGHT = 800;
+	private static final int FRAME_WIDTH = 800;
+	private static final int FRAME_HEIGHT = 800;
 	private Rectangle rec = new Rectangle();
-	private Circle circl = new Circle();
-	private Triangle trian = new Triangle();
 	
 	public Frame()
 	{
-		super("tytul");
-		setSize(WIDTH,HEIGHT);
+		
+		setSize(FRAME_WIDTH,FRAME_HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
+		add(rec);
+		rec.repaint();
 		setVisible(true);
-		creator();
+		//creator();
 	}
-	private void creator()
+	//private void creator()
+	//{
+	//	rec.drawObject(this);
+	//	System.out.println(" x: "+rec.getX()+" y: "+rec.getY());
+	//	circl.drawObject(this);
+	//	System.out.println(" x: "+circl.getX()+" y: "+circl.getY());
+	
+		//trian.drawObject(this);
+//	}
+	public Moveable getFigure(int preX,int preY)
 	{
-		rec.drawObject(this);
-		circl.drawObject(this);
-		trian.drawObject(this);
-	}
-	public Moveable getFigure(int x, int y)
-	{
-		if(circl.contains(x, y))
-			return circl;
-		else if(rec.contains(x, y))
+		if(rec.containsFigure(preX, preY))
 			return rec;
 		
-		else
-			return null;
+		return null;
 	}
 	
 }

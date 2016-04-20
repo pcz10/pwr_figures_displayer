@@ -1,4 +1,4 @@
-package figury;
+/*package figury;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -46,7 +46,7 @@ public class Triangle extends JComponent implements Figure, Moveable
 	}
 	public void drawObject(Frame frame) 
 	{
-		frame.add(new Triangle());
+		frame.add(this);
 		frame.revalidate();
 		frame.repaint();
 	}
@@ -64,4 +64,4 @@ public class Triangle extends JComponent implements Figure, Moveable
 	}
 
 	
-}
+}*/

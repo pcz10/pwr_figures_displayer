@@ -31,8 +31,10 @@ public class Rectangle extends JComponent implements Figure, Moveable
 		this.y = validator.randomize(rangeMin, rangeMax);
 		int temp = validator.randomize(rangeMin, rangeMax);
 		this.width = temp;
-		this.height = temp;
+		this.height = temp;	
+		System.out.println("I am rectangle. My coords are x = "+x+" y = "+y+" height= "+height+" width = "+width);
 	}
+	
 	public int getX() {
 		return x;
 	}
@@ -45,6 +47,7 @@ public class Rectangle extends JComponent implements Figure, Moveable
 	public void setY(int y) {
 		this.y = y;
 	}
+	
 	@Override
 	protected void paintComponent(Graphics g) 
 	{
@@ -52,19 +55,30 @@ public class Rectangle extends JComponent implements Figure, Moveable
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setPaint(new GradientPaint(0,0,Color.gray,20,20,Color.PINK,true));
-		g2.fillRect(100,100,300,300);
+		g2.fillRect(this.x, this.y,this.width, this.height);
+		System.out.println("paintComponent working");
 	}
 	
 	public void drawObject(Frame frame)
 	{
 		frame.add(this);
+		
 		frame.revalidate();
 		frame.repaint();
 	}
-	public void drawRectangle(Frame frame)
+
+	public boolean containsFigure(int x,int y)
 	{
-		frame.getContentPane().add(new Rectangle(1,550));
-		frame.pack();
+		if(x > this.x && x < (this.x + this.width) && y > this.y && y < (this.y+this.height))
+		{
+			System.out.println("contains Figure, x,y: "+x+", "+y+" and this x,y: "+this.x+","+this.y);
+			return true;
+		}
+		else
+		{
+			System.out.println("contains figure returns false");
+			return false;
+		}
 	}
 	@Override
 	public void moveObject(int dx, int dy) 
@@ -74,11 +88,11 @@ public class Rectangle extends JComponent implements Figure, Moveable
 		this.y += dy;
 		repaint();
 	}
-	@Override
-	public boolean contains(int x_, int y_)
-	{
-		if (x_ < (this.x + this.width) && x_ > this.x && y_ < this.y && y_ > (this.y - this.height))
-			return true;
-		return false;
-	}
+	//@Override
+	//public boolean contains(int x_, int y_)
+	//{
+	//	if (x_ < (this.x + this.width) && x_ > this.x && y_ < this.y && y_ > (this.y - this.height))
+	//		return true;
+	//	return false;
+	//}
 }

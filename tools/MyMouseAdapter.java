@@ -1,10 +1,12 @@
 package tools;
 
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import figury.*;
 import javax.swing.JPanel;
+
+import figury.Frame;
 
 public class MyMouseAdapter extends JPanel
 {
@@ -23,23 +25,22 @@ public class MyMouseAdapter extends JPanel
 		@Override
 		public void mousePressed(MouseEvent e)
 		{
-			preX = e.getX();
-			preY = e.getY();
+			  preX = e.getX();
+			  preY = e.getY();
 		}
 		@Override 
 		public void mouseDragged(MouseEvent e)
 		{
 			int dx = e.getX() - preX;
 			int dy = e.getY() - preY;
-			System.out.println("mouse Dragged working!");
+			System.out.println("X,Y = (" +e.getX()+" , "+e.getY()+" )");
 			if(frame.getFigure(preX,preY) != null)
 			{
 				frame.getFigure(preX,preY).moveObject(dx,dy);
 				
 			}
 			preX += dx;
-			preY += dy;
-			
+		    preY += dy;
 		}
 	}
 }
